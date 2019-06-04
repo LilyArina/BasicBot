@@ -5,7 +5,7 @@ from logger import get_logger
 from config import db
 logger = get_logger('discord')
 
-description = '''DLD Bot For Dancing Line Discord'''
+description = '''Bot to Lookup Pokemons'''
 bot = commands.Bot(command_prefix=loadconfig.__prefix__, description=description)
 
 @bot.event
