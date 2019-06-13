@@ -10,7 +10,7 @@ __version__ = "0.0.1"
 logger = get_logger(__name__)
 
 
-class owner():
+class owner(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -82,9 +82,8 @@ class owner():
             msg = ':x: could not find the server with that id'
         await ctx.send(msg)
 
-    @commands.command(name='load')
     @commands.is_owner()
-    async def cog_load(self, ctx, *, cog: str):
+    async def load(self, ctx, *, cog: str):
         """Command which Loads a Module.
         Remember to use dot path. e.g: cogs.owner"""
 
@@ -98,9 +97,8 @@ class owner():
             await ctx.send('**`SUCCESS`**')
             logger.info('<{0}> Loaded successfully.'.format(cog))
 
-    @commands.command(name='unload')
     @commands.is_owner()
-    async def cog_unload(self, ctx, *, cog: str):
+    async def unload(self, ctx, *, cog: str):
         """Command which Unloads a Module.
         Remember to use dot path. e.g: cogs.owner"""
 
@@ -116,7 +114,7 @@ class owner():
 
     @commands.command(name='reload')
     @commands.is_owner()
-    async def cog_reload(self, ctx, *, cog: str):
+    async def reload(self, ctx, *, cog: str):
         """Command which Reloads a Module.
         Remember to use dot path. e.g: cogs.owner"""
 

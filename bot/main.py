@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from config import loadconfig
 from logger import get_logger
-from config import db
+#from config import db
 logger = get_logger('discord')
 
 description = '''Basic Discord Bot'''
@@ -11,7 +11,7 @@ bot = commands.Bot(command_prefix=loadconfig.__prefix__, description=description
 @bot.event
 async def on_ready():
     logger.info('Logged in as:\n{0} (ID: {0.id})'.format(bot.user))
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name='Dancing Line'))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name='Testing v0.0.3'))
     for cog in loadconfig.__cogs__:
         try:
             bot.load_extension(cog)

@@ -9,7 +9,7 @@ __version__ = "0.0.2"
 
 logger = get_logger(__name__)
 
-class mod():
+class mod(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -28,6 +28,7 @@ class mod():
             else:
                 reason = None
             await member.ban(reason=reason)
+            await ctx.send
         else:
             await ctx.send('**:no_entry:** No Users found')
 
@@ -48,7 +49,7 @@ class mod():
                 reason = None
             await ctx.guild.unban(user, reason=reason)
         else:
-            await ctx.send('**:no_entry:** Kein Benutzer angegeben!')
+            await ctx.send('**:no_entry:** No user specified!')
 
     @commands.command(aliases=['prune'])
     @commands.has_permissions(manage_messages = True)
