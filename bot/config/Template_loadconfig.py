@@ -1,5 +1,5 @@
 __token__ = 'Token' #Released Bot
-__prefix__ = 'l.'
+__prefix__ = 'd/'
 
 
 __cogs__ = [

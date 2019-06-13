@@ -13,14 +13,14 @@ class mod(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(aliases=['ban'])
     @commands.has_permissions(ban_members = True)
     @commands.bot_has_permissions(ban_members = True)
-    async def ban(self, ctx, member: discord.Member=None, *reason):
+    async def dracarys(self, ctx, member: discord.Member=None, *reason):
         '''ban a member with a reason (MOD ONLY)
         Example:
         -----------
-        !dl ban @bob#1234
+        d/ dracarys @bob#1234
         '''
         if member is not None:
             if reason:
@@ -28,26 +28,29 @@ class mod(commands.Cog):
             else:
                 reason = None
             await member.ban(reason=reason)
-            await ctx.send
+            description = "**{}** Went up in flames.".format(member)
+            embed=discord.Embed(description=description, color=0xff8040)
+            embed.set_image(url="https://media1.tenor.com/images/4bacffc46ccbc06bd97ab1b531b4bdac/tenor.gif")
+            await ctx.send(embed=embed)
         else:
             await ctx.send('**:no_entry:** No Users found')
 
-    @commands.command()
+    @commands.command(aliases=['ress','unban'])
     @commands.has_permissions(ban_members = True)
     @commands.bot_has_permissions(ban_members = True)
-    async def unban(self, ctx, user: int=None, *reason):
+    async def resurrect(self, ctx, user: discord.User=None, *reason):
         '''unban a member with a reason (MOD ONLY)
         example:
         -----------
-        !dl unban 102815825781596160
+        d/ unban 102815825781596160
         '''
-        user = discord.User(id=user)
         if user is not None:
             if reason:
                 reason = ' '.join(reason)
             else:
                 reason = None
             await ctx.guild.unban(user, reason=reason)
+            await ctx.send('{} have been resurrected.'.format(user))
         else:
             await ctx.send('**:no_entry:** No user specified!')
 
@@ -58,7 +61,7 @@ class mod(commands.Cog):
         '''delete amount of messages (MOD ONLY)
         Example:
         -----------
-        !dl purge 100
+        d/ purge 100
         '''
         try:
             limit = int(limit[0])

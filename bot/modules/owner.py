@@ -14,10 +14,8 @@ class owner(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    async def __local_check(self, ctx):
-        return await ctx.bot.is_owner(ctx.author)
-
     @commands.command(aliases=['quit'])
+    @commands.is_owner()
     async def shutdown(self, ctx):
         '''Stopping the bot :( (BOT OWNER ONLY)'''
         await ctx.send('**:ok:** Bye!')
@@ -25,6 +23,7 @@ class owner(commands.Cog):
         sys.exit(0)
 
     @commands.command(aliases=['game'])
+    @commands.is_owner()
     async def changegame(self, ctx, gameType: str, *, gameName: str):
         '''Change the bots playing game (BOT OWNER ONLY)'''
         gameType = gameType.lower()
@@ -39,6 +38,7 @@ class owner(commands.Cog):
         await self.bot.change_presence(activity=discord.Activity(type=type, name=gameName))
 
     @commands.command()
+    @commands.is_owner()
     async def changestatus(self, ctx, status: str):
         '''Change the  Online Status of the Bot (BOT OWNER ONLY)'''
         status = status.lower()
@@ -53,11 +53,13 @@ class owner(commands.Cog):
         await self.bot.change_presence(status=discordStatus)
 
     @commands.command()
+    @commands.is_owner()
     async def name(self, ctx, name: str):
         '''Changes the global name of the Bot (BOT OWNER ONLY)'''
         await self.bot.edit_profile(username=name)
 
     @commands.command(aliases=['guilds'])
+    @commands.is_owner()
     async def servers(self, ctx):
         '''Lists the current servers the bot is in (BOT OWNER ONLY)'''
         msg = '```js\n'
@@ -68,6 +70,7 @@ class owner(commands.Cog):
         await ctx.send(msg)
 
     @commands.command()
+    @commands.is_owner()
     async def leaveserver(self, ctx, guildid: str):
         '''get the bot to leave a server (BOT OWNER ONLY)
         syntax:
@@ -82,6 +85,7 @@ class owner(commands.Cog):
             msg = ':x: could not find the server with that id'
         await ctx.send(msg)
 
+    @commands.command()
     @commands.is_owner()
     async def load(self, ctx, *, cog: str):
         """Command which Loads a Module.
@@ -97,6 +101,7 @@ class owner(commands.Cog):
             await ctx.send('**`SUCCESS`**')
             logger.info('<{0}> Loaded successfully.'.format(cog))
 
+    @commands.command()
     @commands.is_owner()
     async def unload(self, ctx, *, cog: str):
         """Command which Unloads a Module.
@@ -110,7 +115,7 @@ class owner(commands.Cog):
             logger.error(e)
         else:
             await ctx.send('**`SUCCESS`**')
-            logger.info('<{0}> UnLoaded successfully.'.format(cog))
+            logger.info('<{0}> Unloaded successfully.'.format(cog))
 
     @commands.command(name='reload')
     @commands.is_owner()

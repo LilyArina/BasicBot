@@ -11,7 +11,7 @@ bot = commands.Bot(command_prefix=loadconfig.__prefix__, description=description
 @bot.event
 async def on_ready():
     logger.info('Logged in as:\n{0} (ID: {0.id})'.format(bot.user))
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name='Testing v0.0.3'))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name='Flying'))
     for cog in loadconfig.__cogs__:
         try:
             bot.load_extension(cog)
